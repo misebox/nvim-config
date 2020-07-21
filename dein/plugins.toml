@@ -1,0 +1,41 @@
+# [[plugins]]
+# repo = 'l04m33/vlime'
+# on_ft = 'lisp'
+# hook_add='''
+# let g:vlime_leader = ","
+# set runtimepath+=$HOME/.cache/dein/repos/github.com/l04m33/vlime/
+# '''
+
+[[plugins]]
+repo = 'kovisoft/slimv'
+
+add_hook='''
+" let g:slimv_impl = 'sbcl'
+" 
+" let g:slimv_swank_cmd = '! screen -d -m -t REPL-SBCL sbcl --load ~/.cache/dein/repos/github.com/kovisoft/slimv/slime/start-swank.lisp'
+
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+hook_add = '''
+" TABで補完
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
+let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_auto_popup = 1
+'''
+
+[[plugins]]
+repo = 'alaviss/nim.nvim'
+on_ft = ['nim', 'nimble']
+hook_add = '''
+au User asyncomplete_setup call asyncomplete#register_source({
+  \ 'name': 'nim',
+  \ 'whitelist': ['nim'],
+  \ 'completor': {opt, ctx -> nim#suggest#sug#GetAllCandidates({start, candidates -> asyncomplete#complete(opt['name'], ctx, start, candidates)})}
+  \ })
+'''
+
