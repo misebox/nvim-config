@@ -54,3 +54,5 @@ set noswapfile
 "set hidden
 "set showcmd
 "syntax enable
+map <C-n> :set invnumber<CR>
+
